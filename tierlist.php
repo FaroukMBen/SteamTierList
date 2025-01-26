@@ -17,10 +17,10 @@
         </head>
         <body>
             <section id="console">
-                    
+                <h2>Console</h2>
             </section>
 
-            <button onclick=showConsole()>Show console</button>
+            <button onclick=displayConsole() id="displayConsoleButton">Show console</button>
             
             <input type="text" id="newTierName">
             <button onclick=createTier()>Create a new tier</button>
@@ -45,5 +45,7 @@
                     ?>
                 </div>
             </section>
+
+            <script src="script.js"></script>
         </body>
     </html>

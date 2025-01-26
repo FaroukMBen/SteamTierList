@@ -2,11 +2,10 @@ let tierCount = 0;
 
 function createTier(){
 
-    let tierName = document.getElementById('newTierName').value;
+    const consoleE = document.getElementById('console');
+    let tierName = document.getElementById('newTierName').value || "New tier";
 
-    if(tierName == ""){
-        tierName = "new tier";
-    }
+    document.getElementById('newTierName').value = "";
 
     const tier = document.createElement('div');
     tier.classList.add('Tier');
@@ -26,4 +25,30 @@ function createTier(){
 
     tierCount++;
 
+    const action = document.createElement('p');
+    action.textContent = "Tier created with id : " + tier.id + " and name : " + tierName;
+
+    consoleE.appendChild(action);
+
+}
+
+function displayConsole(){
+    
+    const consoleE = document.getElementById('console');
+    const displayButton = document.getElementById('displayConsoleButton');
+
+
+    if(window.getComputedStyle(consoleE).display != "none"){ // To get the style of the section from the css file because style.display only retrieves what's directly set in the HTML
+        consoleE.style.display = "none";
+        displayButton.textContent = "Show console";
+    }
+    else{
+        consoleE.style.display = "block";
+        displayButton.textContent = "Hide console";
+    }
+
+    const action = document.createElement('p');
+    action.textContent = "Display of the console is set to " + consoleE.style.display;
+
+    consoleE.appendChild(action);
 }

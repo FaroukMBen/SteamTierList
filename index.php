@@ -83,6 +83,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     }
                 ?>
             </div>
-        </div>
+        </section>
+
     </body>
 </html>
