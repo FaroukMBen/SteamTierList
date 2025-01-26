@@ -1,9 +1,10 @@
 <?php
+session_start();
 
 $steamID = null;
-$GLOBALS["gamesList"] = null;
+$_SESSION["gamesList"] = null;
 
-$GLOBALS["steamAPIKey"] = "api_key";
+$GLOBALS["steamAPIKey"] = "85BA65C1F05152740E42267DA183B684";
 
 
 function getSteamGames($steamID,$freeGamesIncluded=False){
@@ -47,7 +48,7 @@ function gameImagePathByID($game, $imgType='header'){
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     if ($_POST["action"] = "formSteamID"){
         $steamID =$_POST["steamID"];
-        $GLOBALS["gamesList"] = getSteamGames($steamID,True);
+        $_SESSION["gamesList"] = getSteamGames($steamID,True);
     }
 }
 
@@ -68,17 +69,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         </form>
         <section>
             <h2>Your Games</h2>
-            <?php
-                foreach($GLOBALS["gamesList"] as $game){
-                    $path = gameImagePathByID($game);
-                    echo '
-                    <div class="game">
-                        <p>'. $game["name"] .'</p>
-                        <img src="'. $path .'" alt="img'. $game["name"] .'"> 
-                    </div>
-                    ';
-                }
-            ?>
-        </section>
+            <a href="tierlist.php">Go to Tier List Maker</a>
+            <div>
+                <?php
+                    foreach($_SESSION["gamesList"] as $game){
+                        $path = gameImagePathByID($game);
+                        echo '
+                        <div class="game">
+                            <p>'. $game["name"] .'</p>
+                            <img src="'. $path .'" alt="img'. $game["name"] .'"> 
+                        </div>
+                        ';
+                    }
+                ?>
+            </div>
+        </div>
     </body>
 </html>
