@@ -1,3 +1,166 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(to bottom right, #1D2530, #1B70AF);
+}
+
+section, nav, #formSteamID{
+    display: flex;
+    align-items: center;
+    background: linear-gradient(to bottom right, #365F8B, #283E58);
+    justify-content: center;
+    margin: 2em;
+}
+
+section{
+    border-radius: 0px 0px 15px 15px;
+}
+
+nav{
+    border-radius: 15px 15px 0px 0px;
+}
+
+nav a{
+    font-size: 32px;
+    text-decoration: none;
+    color: #FFFFFF;
+    margin: 1em 5em 1em 5em;
+    transition-duration: 0.5s;
+}
+
+nav a:hover{
+    font-size: 35px;
+    color:#b0deff;
+}
+
+#actuelPage{
+    color:#1A9FFF;
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-thickness: 5px;
+}
+
+
+input[type="checkbox"]{
+    display: none;
+}
+
+label[for="includeFreeGames"], input[type="submit"]{
+    display: flex;
+    font-size: 24px;
+    border-radius: 15px;
+    width: 250px;
+    height: 80px;
+    border-color: transparent;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0,0.25);
+    justify-content: center;
+    align-items: center;
+    margin: 2em 1em 2em 1em ;
+}
+
+label[for="includeFreeGames"]{
+    background-color: #1A9FFF;
+    color: #0A2B42;
+    transition-duration: 0.5s;
+}
+
+label[for="includeFreeGames"]:hover{
+    cursor:pointer;
+    background-color: #1acdff;
+}
+
+input[type="checkbox"]:checked + label[for="includeFreeGames"]{
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0,0.25) inset;
+    background-color: #106c85;
+    color: #000000;
+}
+
+
+input[type="submit"]{
+    background-color: #659C1E;
+    color: #243909;
+    transition-duration: 0.5s;
+}
+
+input[type="submit"]:hover{
+    cursor:pointer;
+    background-color: #a5ed47;
+}
+
+input[type="text"]{
+    margin: 2em 1em 2em 1em ;
+    width: 700px;
+    height: 80px;
+    border-radius: 15px;
+    border-color: transparent;
+    background-color: #24506C;
+    color: #1A9FFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0,0.25) inset;
+}
+
+input[type="text"]::placeholder, input[type="text"]{
+    color:#1A9FFF;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+#games{
+    flex-direction: column;
+}
+
+#games h2{
+    color: #061B30;
+    font-size: 40px;
+}
+
+#games a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300;
+    height: 80;
+    background-color: #1EB25B;
+    border-radius: 15px;
+    text-decoration: none;
+    font-size: 24px;
+    color: #07381c;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0,0.25);
+    transition-duration: 0.5s;
+    margin: 1em;
+}
+
+#games div{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.game{
+    flex: 1 1 25%;
+    display :flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.game img{
+    height: 150px;
+    width: 300px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0,0.25);
+}
+
+.game p{
+    color: #FFFFFF;
+    font-size: 20px;
+}
+
+
+#games a:hover{
+    background-color: #35ff89;
+}
+
 #console{
     display : none;
 }

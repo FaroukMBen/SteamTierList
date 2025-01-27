@@ -31,16 +31,19 @@
             
             <section>
                 <h2>Your Games</h2>
-                <a href="tierlist.php">Go to Tier List Maker</a>
                 <div>
                     <?php
-                        foreach($_SESSION["gamesList"] as $game){
-                            $path = gameImagePathByID($game, 'icon');
-                            echo '
-                            <div class="gameIcon">
-                                <img src="'. $path .'" alt="img'. $game["name"] .'" height="50px" width="50px"> 
-                            </div>
-                            ';
+                        if($_SESSION["gamesList"] != null){
+                            foreach($_SESSION["gamesList"] as $game){
+                                $path = gameImagePathByID($game, 'icon');
+                                echo '
+                                <div class="gameIcon">
+                                    <img src="'. $path .'" alt="img'. $game["name"] .'" height="50px" width="50px"> 
+                                </div>
+                                ';
+                            }
+                        }else{
+                            echo '<p>Pas de jeu trouve</p>';
                         }
                     ?>
                 </div>

@@ -7,9 +7,12 @@ $_SESSION["gamesList"] = null;
 $GLOBALS["steamAPIKey"] = "85BA65C1F05152740E42267DA183B684";
 
 
-function getSteamGames($steamID,$freeGamesIncluded=False){
+function getSteamGames($steamID, $includeFG,$includeAppInfo="true"){
     $apiBaseKey = "https://api.steampowered.com/IPlayerService/GetOwnedGames/v1/";
-    $url = $apiBaseKey . "?key=" . $GLOBALS["steamAPIKey"] . "&steamid=" . $steamID . "&include_appinfo=true";
+
+    
+
+    $url = $apiBaseKey . "?key=" . $GLOBALS["steamAPIKey"] . "&steamid=" . $steamID . "&include_appinfo=" . $includeAppInfo . "&include_played_free_games" . $includeFG;
     
     $curl = curl_init($url);
     curl_setopt_array($curl,[
@@ -21,15 +24,20 @@ function getSteamGames($steamID,$freeGamesIncluded=False){
 
     $response = json_decode($response,true);
 
-    foreach($response["response"]["games"] as $game){
-        $gamesList[] = [
-            "id"=> $game["appid"], 
-            "name" => $game["name"] ?? null,
-            "hash" => $game['img_icon_url']
-        ];
+    $gamesList = [];
 
+    if($response != ""){
+        foreach($response["response"]["games"] as $game){
+            $gamesList[] = [
+                "id"=> $game["appid"], 
+                "name" => $game["name"] ?? null,
+                "hash" => $game['img_icon_url']
+            ];
+        }
+    }else{
+        $gamesList = null;
     }
-
+    
     return $gamesList;
 
 }
@@ -48,7 +56,13 @@ function gameImagePathByID($game, $imgType='header'){
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     if ($_POST["action"] = "formSteamID"){
         $steamID =$_POST["steamID"];
-        $_SESSION["gamesList"] = getSteamGames($steamID,True);
+        if (isset($_POST['includeFreeGames'])) {
+            $includeFreeGames = "true";
+        } else {
+            $includeFreeGames = "false";
+        }
+
+        $_SESSION["gamesList"] = getSteamGames($steamID,$includeFreeGames);
     }
 }
 
@@ -62,27 +76,40 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-        <form method="POST" action="">
-            <label for="inputSteamID">Recuperez vos jeux Steam</label>
+        <nav>
+            <a href="index.php" id="actuelPage">HOME</a>
+            <a href="tierlist.php">TIERLIST</a>
+        </nav>
+
+        <form method="POST" action="" id="formSteamID">
             <input type="text" name="steamID" placeholder="Enter your Steam ID ...">
-            <input type="submit" action="formSteamID">
+            
+            <input type="checkbox" name="includeFreeGames" id="includeFreeGames">
+            <label for="includeFreeGames">Include free games</label>
+
+            <input type="submit" action="formSteamID" value="Get your games">
         </form>
-        <section>
+        
+        <section id="games">
             <h2>Your Games</h2>
-            <a href="tierlist.php">Go to Tier List Maker</a>
             <div>
                 <?php
-                    foreach($_SESSION["gamesList"] as $game){
-                        $path = gameImagePathByID($game);
-                        echo '
-                        <div class="game">
-                            <p>'. $game["name"] .'</p>
-                            <img src="'. $path .'" alt="img'. $game["name"] .'"> 
-                        </div>
-                        ';
+                    if($_SESSION["gamesList"] != null){
+                        foreach($_SESSION["gamesList"] as $game){
+                            $path = gameImagePathByID($game);
+                            echo '
+                            <div class="game">
+                                <img src="'. $path .'" alt="img'. $game["name"] .'"> 
+                                <p>'. $game["name"] .'</p>
+                            </div>
+                            ';
+                        }
+                    }else{
+                        echo "<p> No games found </p>";
                     }
                 ?>
             </div>
+            <a href="tierlist.php" id="goTierList">Go to Tier List Maker</a>
         </section>
 
     </body>
