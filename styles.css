@@ -11,7 +11,7 @@ section, nav, #formSteamID{
     margin: 2em;
 }
 
-section{
+#games{
     border-radius: 0px 0px 15px 15px;
 }
 
@@ -32,7 +32,7 @@ nav a:hover{
     color:#b0deff;
 }
 
-#actuelPage{
+#currentPage{
     color:#1A9FFF;
     font-weight: bold;
     text-decoration: underline;
@@ -88,13 +88,21 @@ input[type="submit"]:hover{
 
 input[type="text"]{
     margin: 2em 1em 2em 1em ;
-    width: 700px;
-    height: 80px;
     border-radius: 15px;
     border-color: transparent;
     background-color: #24506C;
     color: #1A9FFF;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0,0.25) inset;
+}
+
+#steamIDInput{
+    width: 700px;
+    height: 80px;
+}
+
+#tierNameInput{
+    width: 200px;
+    height: 80px;
 }
 
 input[type="text"]::placeholder, input[type="text"]{
@@ -135,20 +143,27 @@ input[type="text"]::placeholder, input[type="text"]{
 }
 
 .game{
-    flex: 1 1 25%;
+    flex: 1 1;
     display :flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-
-
 .game img{
-    height: 150px;
-    width: 300px;
+    margin: 10px;
     border-radius: 15px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0,0.25);
+}
+
+.gameIndex img{
+    height: 150px;
+    width: 300px;
+}
+
+.gameTierList img{
+    height: 100px;
+    width: 100px;
 }
 
 .game p{
@@ -163,4 +178,84 @@ input[type="text"]::placeholder, input[type="text"]{
 
 #console{
     display : none;
+}
+
+section button{
+    background: linear-gradient(to left, #08BAFF, #2C74FF);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0,0.25);
+    border-color: transparent;
+    height: 80px;
+    width: 300;
+    border-radius: 15px;
+    color: #FFFFFF;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 1em;
+}
+
+#tierContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex: 1 1 100%;
+    background: #4A76A6;
+    border-radius: 15px;
+    margin: 1em;
+}
+
+#tierlist{
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.tier{
+    flex: 1 1 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.tier div{
+    background-color: #24506C;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0,0.25) inset;
+    border-radius: 15px;
+    width: 950;
+    height: 100;
+}
+
+.tier p{
+    display: flex;
+    justify-content: center;
+    background-color: #38A0E2;
+    height: 100;
+    width: 120;
+    border-radius: 15px;
+    align-items: center;
+    color: #FFFFFF;
+    font-size: 20px;
+    margin: 1em;
+}
+
+.tier button{
+    height: 100;
+    width: 120;
+    color: #365311;
+    background: #97CD52;
+    font-size: 20px;
+    transition-duration: 0.5s;
+}
+
+.tier button:hover{
+    color: #365311;
+    background: #bdf375;
+    cursor: pointer;
+}
+
+#console{
+    border-radius: 15px;
+    background-color: #3D4450;
+    color: #FFFFFF;
+    
+
 }

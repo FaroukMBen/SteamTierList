@@ -77,12 +77,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     </head>
     <body>
         <nav>
-            <a href="index.php" id="actuelPage">HOME</a>
+            <a href="index.php" id="currentPage">HOME</a>    
             <a href="tierlist.php">TIERLIST</a>
         </nav>
 
         <form method="POST" action="" id="formSteamID">
-            <input type="text" name="steamID" placeholder="Enter your Steam ID ...">
+            <input type="text" name="steamID" placeholder="Enter your Steam ID ..." id="steamIDInput">
             
             <input type="checkbox" name="includeFreeGames" id="includeFreeGames">
             <label for="includeFreeGames">Include free games</label>
@@ -98,7 +98,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         foreach($_SESSION["gamesList"] as $game){
                             $path = gameImagePathByID($game);
                             echo '
-                            <div class="game">
+                            <div class="game gameIndex"> 
                                 <img src="'. $path .'" alt="img'. $game["name"] .'"> 
                                 <p>'. $game["name"] .'</p>
                             </div>

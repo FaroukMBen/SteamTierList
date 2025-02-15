@@ -16,38 +16,48 @@
             <link rel="stylesheet" href="styles.css">
         </head>
         <body>
-            <section id="console">
-                <h2>Console</h2>
+            <nav>
+                <a href="index.php">HOME</a>
+                <a href="tierlist.php" id="currentPage">TIERLIST</a>
+            </nav>
+
+            <section id="consoleContainer">
+                <div id="console">
+                </div>
+                <button onclick=displayConsole() id="displayConsoleButton">Show console</button>
             </section>
 
-            <button onclick=displayConsole() id="displayConsoleButton">Show console</button>
-            
-            <input type="text" id="newTierName">
-            <button onclick=createTier()>Create a new tier</button>
-            
-            <section id="tierContainer">
+            <section id="tierlist">
+                <button onclick=createTier()>Create a new tier</button>
+                <input type="text" id="tierNameInput">
+                
+                <div id="tierContainer">
 
+                </div>
             </section>
+                        
             
-            <section>
+            
+            <section id="games">
                 <h2>Your Games</h2>
                 <div>
                     <?php
+                        // Must delete the div
                         if($_SESSION["gamesList"] != null){
                             foreach($_SESSION["gamesList"] as $game){
-                                $path = gameImagePathByID($game, 'icon');
+                                $path = gameImagePathByID($game);
                                 echo '
-                                <div class="gameIcon">
-                                    <img src="'. $path .'" alt="img'. $game["name"] .'" height="50px" width="50px"> 
+                                <div class="game gameTierList">
+                                    <img src="'. $path .'" alt="img'. $game["name"] .'">
                                 </div>
                                 ';
                             }
                         }else{
-                            echo '<p>Pas de jeu trouve</p>';
+                            echo "<p> No games found </p>";
                         }
                     ?>
                 </div>
-            </section>
+        </section>
 
             <script src="script.js"></script>
         </body>

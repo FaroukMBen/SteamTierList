@@ -15,20 +15,16 @@ let tierCreatedCounter = 0;
 function createTier() {
     const consoleE = document.getElementById('console');
     
-    let tierName = document.getElementById('newTierName').value.trim() || "New tier";
+    let tierName = document.getElementById('tierNameInput').value.trim() || "New tier";
 
-    document.getElementById('newTierName').value = "";
+    document.getElementById('tierNameInput').value = "";
 
     const tier = document.createElement('div');
-    tier.classList.add('Tier');
+    tier.classList.add('tier');
     tier.id = 'tier' + tierCreatedCounter;  // Unique ID based on a counter
 
     const tierTitle = document.createElement('p');
-    tierTitle.classList.add('tierTitle');
     tierTitle.textContent = tierName;
-
-    const tierRank = document.createElement('p');
-    tierRank.textContent = tierCount;
 
     const tierGamesContainer = document.createElement('div');
     tierGamesContainer.classList.add('tierGamesContainer');
@@ -39,12 +35,12 @@ function createTier() {
     };
     tierDeleteButton.textContent = "Delete tier";
 
-    tier.appendChild(tierRank); 
     tier.appendChild(tierTitle);  
     tier.appendChild(tierGamesContainer);  
     tier.appendChild(tierDeleteButton);  
 
     const tierContainer = document.getElementById('tierContainer');
+    
     tierContainer.appendChild(tier);
 
     tierCount++;
@@ -75,6 +71,9 @@ function deleteTier(tierID) {
 
     const action = document.createElement('p');
     action.textContent = `Tier deleted with id: ${tier.id} and name: ${tierTitle.textContent}`;
+
+    tierCount--;
+
     consoleE.appendChild(action);
 }
 
@@ -107,4 +106,15 @@ window.addEventListener('beforeunload', function(event) {
 
 window.addEventListener('load', function(event) {
     this.alert("BEWARE: If you refresh or quit the page you will lose your tierList progression");
+});
+
+document.querySelectorAll(".tier p").forEach(element => {
+    element.addEventListener("dblclick", function() {
+        this.setAttribute("contenteditable", "true");
+        this.focus();
+    });
+
+    element.addEventListener("blur", function() {
+        this.removeAttribute("contenteditable");
+    });
 });
